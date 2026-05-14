@@ -121,7 +121,7 @@ class HashAdapter {
 ## 📂 Project Structure
 
 ```
-CertChain/
+Blockchain-Based-Academic-Certificate-Verification-System/
 │
 ├── index.html       # 5 screens + 2 modals (290 lines)
 ├── style.css        # Design system, CSS variables, dark theme (450 lines)
