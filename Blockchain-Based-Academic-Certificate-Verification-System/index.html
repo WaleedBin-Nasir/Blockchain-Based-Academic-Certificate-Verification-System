@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blockchain-Based Academic Certificate Verification System - Secure, tamper-proof digital certificates">
+  <title>CertChain - Blockchain Certificate Verification System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-pattern"></div>
+<div class="bg-grid"></div>
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ============================== -->
+<!-- SCREEN 1: LANDING PAGE         -->
+<!-- ============================== -->
+<div class="screen active" id="screen-landing">
+  <nav class="navbar">
+    <div class="nav-brand" onclick="showScreen('landing')">
+      <div class="logo-icon">⛓️</div>
+      <span>CertChain</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link active" onclick="showScreen('landing')">Home</button>
+      <button class="nav-link" onclick="showScreen('verify-public')">Verify Certificate</button>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-outline btn-sm" onclick="showScreen('login')">Sign In</button>
+      <button class="btn btn-primary btn-sm" onclick="showScreen('signup')">Get Started</button>
+    </div>
+  </nav>
+
+  <section class="landing-hero">
+    <h1>Tamper-Proof Academic Certificates on Blockchain</h1>
+    <p>Issue, verify, and manage academic credentials with cryptographic security. Powered by SHA-256 hashing and distributed ledger technology.</p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary btn-lg" onclick="showScreen('signup')">🚀 Get Started Free</button>
+      <button class="btn btn-secondary btn-lg" onclick="showScreen('verify-public')">🔍 Verify a Certificate</button>
+    </div>
+  </section>
+
+  <section class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔐</div>
+      <h3>SHA-256 Hashing</h3>
+      <p>Every certificate is cryptographically hashed ensuring absolute data integrity and tamper detection.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⛓️</div>
+      <h3>Blockchain Storage</h3>
+      <p>Certificate hashes stored on immutable distributed ledger. Once recorded, it cannot be altered.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <h3>QR Code Verification</h3>
+      <p>Instant verification via QR codes. Employers scan and get real-time verification results.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏛️</div>
+      <h3>Multi-Institution Network</h3>
+      <p>Decentralized network supporting multiple educational institutions as independent nodes.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🛡️</div>
+      <h3>Revocation Support</h3>
+      <p>Institutions can revoke certificates when necessary with permanent blockchain audit trail.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Audit & Analytics</h3>
+      <p>Complete verification history with timestamps, verifier details, and geographic analytics.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ============================== -->
+<!-- SCREEN 2: LOGIN                -->
+<!-- ============================== -->
+<div class="screen" id="screen-login">
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="logo-icon">⛓️</div>
+        <h1>CertChain</h1>
+      </div>
+      <p class="auth-subtitle">Sign in to your account to manage certificates</p>
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="loginEmail" placeholder="you@institution.edu" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" required>
+        </div>
+        <div class="form-group">
+          <label>Role</label>
+          <select id="loginRole">
+            <option value="institution">🏛️ Institution</option>
+            <option value="student">🎓 Student</option>
+            <option value="admin">⚙️ System Admin</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full btn-lg">Sign In</button>
+      </form>
+      <div class="auth-link">
+        Don't have an account? <a onclick="showScreen('signup')">Sign Up</a>
+      </div>
+      <div class="auth-link" style="margin-top:10px;">
+        <a onclick="showScreen('landing')">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- SCREEN 3: SIGNUP               -->
+<!-- ============================== -->
+<div class="screen" id="screen-signup">
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="logo-icon">⛓️</div>
+        <h1>CertChain</h1>
+      </div>
+      <p class="auth-subtitle">Create your account to get started</p>
+      <form id="signupForm" onsubmit="handleSignup(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Muhammad" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Ahmad" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@institution.edu" required>
+        </div>
+        <div class="form-group">
+          <label>Institution / Organization</label>
+          <input type="text" placeholder="FAST-NUCES" required>
+        </div>
+        <div class="form-group">
+          <label>Account Type</label>
+          <select>
+            <option value="institution">🏛️ Educational Institution</option>
+            <option value="student">🎓 Student / Graduate</option>
+            <option value="employer">💼 Employer / Verifier</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" placeholder="Min 8 characters" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full btn-lg">Create Account</button>
+      </form>
+      <div class="auth-link">
+        Already have an account? <a onclick="showScreen('login')">Sign In</a>
+      </div>
+      <div class="auth-link" style="margin-top:10px;">
+        <a onclick="showScreen('landing')">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- SCREEN 4: INSTITUTION DASHBOARD -->
+<!-- ============================== -->
+<div class="screen" id="screen-dashboard">
+  <nav class="navbar">
+    <div class="nav-brand" onclick="showScreen('dashboard')">
+      <div class="logo-icon">⛓️</div>
+      <span>CertChain</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link active" data-tab="overview" onclick="switchDashTab(this,'overview')">Overview</button>
+      <button class="nav-link" data-tab="issue" onclick="switchDashTab(this,'issue')">Issue Certificate</button>
+      <button class="nav-link" data-tab="manage" onclick="switchDashTab(this,'manage')">Manage</button>
+      <button class="nav-link" data-tab="audit" onclick="switchDashTab(this,'audit')">Audit Logs</button>
+    </div>
+    <div class="nav-user">
+      <span style="font-size:13px;color:var(--text-secondary);">FAST-NUCES</span>
+      <div class="avatar">FN</div>
+      <button class="btn btn-sm btn-secondary" onclick="handleLogout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="main-content">
+    <!-- OVERVIEW TAB -->
+    <div id="tab-overview">
+      <div class="page-header">
+        <h2>Institution Dashboard</h2>
+        <p>Welcome back, FAST-NUCES — here's your certificate overview</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon purple">📜</div>
+          <div class="stat-value" id="statTotal">47</div>
+          <div class="stat-label">Total Certificates</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">✅</div>
+          <div class="stat-value" id="statActive">42</div>
+          <div class="stat-label">Active</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon cyan">🔍</div>
+          <div class="stat-value">156</div>
+          <div class="stat-label">Verifications (30d)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange">⚠️</div>
+          <div class="stat-value" id="statRevoked">3</div>
+          <div class="stat-label">Revoked</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Recent Certificates</h3>
+          <button class="btn btn-primary btn-sm" onclick="switchDashTab(document.querySelector('[data-tab=issue]'),'issue')">+ Issue New</button>
+        </div>
+        <div class="card-body table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Certificate ID</th><th>Student</th><th>Program</th><th>Issue Date</th><th>Status</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="certTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ISSUE CERTIFICATE TAB -->
+    <div id="tab-issue" style="display:none;">
+      <div class="page-header">
+        <h2>Issue New Certificate</h2>
+        <p>Create and store a new academic certificate on the blockchain</p>
+      </div>
+      <div class="card" style="max-width:700px;">
+        <div class="card-body">
+          <form id="issueForm" onsubmit="handleIssueCert(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Student Name</label>
+                <input type="text" id="issueStudentName" placeholder="Muhammad Ahmad" required>
+              </div>
+              <div class="form-group">
+                <label>Student ID</label>
+                <input type="text" id="issueStudentId" placeholder="24F-0513" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Program / Degree</label>
+                <select id="issueProgram" required>
+                  <option value="">Select Program</option>
+                  <option>BS Computer Science</option>
+                  <option>BS Software Engineering</option>
+                  <option>BS Data Science</option>
+                  <option>BS Artificial Intelligence</option>
+                  <option>MS Computer Science</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Graduation Date</label>
+                <input type="date" id="issueGradDate" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>CGPA</label>
+                <input type="number" step="0.01" min="0" max="4" id="issueCGPA" placeholder="3.65" required>
+              </div>
+              <div class="form-group">
+                <label>Certificate Expiry</label>
+                <select id="issueExpiry">
+                  <option value="none">No Expiry (Permanent)</option>
+                  <option value="1year">1 Year</option>
+                  <option value="3years">3 Years</option>
+                  <option value="5years">5 Years</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Additional Notes</label>
+              <textarea rows="3" placeholder="e.g. Dean's List, Honors, etc." style="resize:vertical;"></textarea>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:8px;">
+              <button type="submit" class="btn btn-primary btn-lg">⛓️ Issue & Store on Blockchain</button>
+              <button type="button" class="btn btn-secondary btn-lg" onclick="switchDashTab(document.querySelector('[data-tab=overview]'),'overview')">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- MANAGE CERTIFICATES TAB -->
+    <div id="tab-manage" style="display:none;">
+      <div class="page-header">
+        <h2>Manage Certificates</h2>
+        <p>View, revoke, or generate QR codes for your issued certificates</p>
+      </div>
+      <div class="cert-grid" id="certGrid"></div>
+    </div>
+
+    <!-- AUDIT LOGS TAB -->
+    <div id="tab-audit" style="display:none;">
+      <div class="page-header">
+        <h2>Verification Audit Logs</h2>
+        <p>Track all verification attempts on your issued certificates</p>
+      </div>
+      <div class="card">
+        <div class="card-body table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Timestamp</th><th>Certificate</th><th>Verifier</th><th>IP Address</th><th>Result</th></tr>
+            </thead>
+            <tbody id="auditTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- SCREEN 5: PUBLIC VERIFICATION  -->
+<!-- ============================== -->
+<div class="screen" id="screen-verify-public">
+  <nav class="navbar">
+    <div class="nav-brand" onclick="showScreen('landing')">
+      <div class="logo-icon">⛓️</div>
+      <span>CertChain</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link" onclick="showScreen('landing')">Home</button>
+      <button class="nav-link active">Verify Certificate</button>
+    </div>
+    <div>
+      <button class="btn btn-outline btn-sm" onclick="showScreen('login')">Sign In</button>
+    </div>
+  </nav>
+
+  <div class="main-content" style="max-width:800px;margin:0 auto;">
+    <div class="page-header" style="text-align:center;">
+      <h2>Verify a Certificate</h2>
+      <p>Enter a Certificate ID or scan a QR code to instantly verify authenticity</p>
+    </div>
+
+    <div class="verify-box" id="verifyBox">
+      <div class="icon">🔍</div>
+      <h3>Certificate Verification Portal</h3>
+      <p>No authentication required — free and instant</p>
+      <div class="verify-input-group">
+        <input type="text" id="verifyInput" placeholder="Enter Certificate ID (e.g., CERT-2026-0001)">
+        <button class="btn btn-primary" onclick="handleVerify()">Verify Now</button>
+      </div>
+    </div>
+
+    <div id="verifyResult"></div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- MODAL: QR CODE                 -->
+<!-- ============================== -->
+<div class="modal-overlay" id="qrModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>📱 Certificate QR Code</h3>
+      <button class="btn-icon" onclick="closeModal('qrModal')">✕</button>
+    </div>
+    <div class="modal-body" style="text-align:center;">
+      <p style="color:var(--text-secondary);margin-bottom:16px;">Scan this QR code to verify the certificate</p>
+      <div class="qr-display" id="qrDisplay"></div>
+      <p id="qrCertId" style="font-family:monospace;color:var(--accent);margin-top:12px;font-size:14px;"></p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('qrModal')">Close</button>
+      <button class="btn btn-primary" onclick="toast('QR code downloaded!','success')">Download QR</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- MODAL: REVOKE                  -->
+<!-- ============================== -->
+<div class="modal-overlay" id="revokeModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>⚠️ Revoke Certificate</h3>
+      <button class="btn-icon" onclick="closeModal('revokeModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="color:var(--text-secondary);margin-bottom:16px;">This action is <strong>permanent</strong> and will be recorded on the blockchain.</p>
+      <div class="form-group">
+        <label>Certificate ID</label>
+        <input type="text" id="revokeCertId" readonly>
+      </div>
+      <div class="form-group">
+        <label>Reason for Revocation</label>
+        <select id="revokeReason">
+          <option>Issued by mistake</option>
+          <option>Fraud detected</option>
+          <option>Institutional request</option>
+          <option>Student disciplinary action</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('revokeModal')">Cancel</button>
+      <button class="btn btn-danger" onclick="handleRevoke()">🗑️ Confirm Revocation</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
